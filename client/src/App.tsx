@@ -1,9 +1,11 @@
-import Landing from "./pages/Landing";
+import { Outlet } from "react-router-dom";
+
 
 export default function App(){
   return(
-    <>
-      <Landing />
-    </>
+    <div className="w-screen h-screen overflow-hidden">
+      <Outlet />
+
+    </div>
   )
 }

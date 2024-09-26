@@ -11,7 +11,7 @@ import { hideLoginForm } from "../features/loginFormDisplaySlice";
 // type boolSetter = (value: boolean) => void; 
 
 
-export default function LoginForm({}) {
+export default function RegisterForm({}) {
     const {
         register,
         handleSubmit,

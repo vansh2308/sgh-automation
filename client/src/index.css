@@ -11,9 +11,18 @@
     margin: 0;
     padding: 0;
     font-family: "Poppins", system-ui;
-    transition: all 0.5s ease;
+}
+
+.hero img{
+    transition: all 0.7s ease;
+    
 }
 
 body{
     @apply bg-blue-1
+}
+
+.pink-btn{
+    @apply bg-pink rounded-full py-3 px-9 text-white w-fit text-sm hover:bg-pink/80;
+
 }
