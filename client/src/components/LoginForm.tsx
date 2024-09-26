@@ -1,17 +1,16 @@
 import { useForm } from "react-hook-form";
-import { loginFormData, loginFormSchema } from "../types";
+import { loginFormData, loginFormFieldProps, loginFormSchema } from "../types";
 import { MdClose } from "react-icons/md";
 import { zodResolver } from "@hookform/resolvers/zod";
-import FormField from "./FormField";
+// import FormField from "./FormField";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { hideLoginForm } from "../features/loginFormDisplaySlice";
 
 
-// type boolSetter = (value: boolean) => void; 
 
 
-export default function LoginForm({}) {
+export default function LoginForm({ }) {
     const {
         register,
         handleSubmit,
@@ -22,7 +21,7 @@ export default function LoginForm({}) {
     });
 
     const dispatch = useDispatch();
-    
+
 
     const onSubmit = async (data: loginFormData) => {
         console.log("SUCCESS")
@@ -31,7 +30,7 @@ export default function LoginForm({}) {
 
     return (
         <form
-            className="w-[25vw] h-[60vh] bg-white rounded-xl shadow-lg relative flex flex-col items-center p-10 py-20 font-light text-sm"
+            className="w-[25vw] h-[60vh] bg-white rounded-xl shadow-lg relative flex flex-col items-center p-10 py-14 font-light text-sm"
 
             onSubmit={handleSubmit(onSubmit)}
         >
@@ -61,9 +60,37 @@ export default function LoginForm({}) {
 
             />
 
-            <span className="text-[0.7rem] font-medium text-pink underline mt-9 cursor-pointer w-full"> Not registered? Create an account </span>
 
-            <button className="pink-btn absolute bottom-10" > Sign In </button>
+            <span className="text-[0.7rem] font-medium text-pink underline mt-9 cursor-pointer w-full"> <Link to={"/register"}> Not registered? Create an account </Link> </span>
+
+
+            <button type="submit" className="pink-btn absolute bottom-10" > Sign In </button>
         </form>
     )
 }
+
+
+
+
+
+const FormField: React.FC<loginFormFieldProps> = ({
+    type,
+    placeholder,
+    name,
+    register,
+    error,
+    className
+}) => (
+    <>
+        <input
+            type={type}
+            placeholder={placeholder}
+            {...register(name)}
+            className={className}
+        />
+        {error && <span
+            className="text-red-600 text-[0.6rem] font-medium mt-1 w-full">
+            {error.message}
+        </span>}
+    </>
+);
