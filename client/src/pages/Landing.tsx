@@ -18,7 +18,6 @@ export default function Landing() {
     const dispatch = useDispatch()
 
 
-
     return (
         <div className="w-full h-full relative overflow-hidden hero">
             <div 
@@ -31,7 +30,7 @@ export default function Landing() {
                     Shri Ganpati Handicrafts
                 </h1>
                 <p className="font-light text-[1rem]"> Workflow Management System </p>
-                <Link className="bg-pink rounded-full py-3 px-10 text-white w-fit mt-7 text-sm hover:bg-pink/80 z-30"
+                <Link className="bg-pink rounded-full py-3 px-10 text-white w-fit mt-7 text-sm hover:opacity-80 z-30"
                     onClick={ () => dispatch(showLoginForm())} to={"/login"}
                 >
                     Sign In
