@@ -3,10 +3,12 @@ import type { Action, ThunkAction } from '@reduxjs/toolkit'
 import { configureStore } from '@reduxjs/toolkit'
 
 import loginFormDisplayReducer from '../features/loginFormDisplaySlice'
+import themeReducer from '../features/themeSlice'
 
 export const store = configureStore({
   reducer: {
-    loginFormDisplay: loginFormDisplayReducer
+    loginFormDisplay: loginFormDisplayReducer,
+    theme: themeReducer
   }
 })
 

@@ -107,7 +107,7 @@ export default function RegisterForm({ }) {
 
             <p className="text-[0.7rem] font-medium text-pink underline mt-9 cursor-pointer w-full cursor-pointer"> <Link to={"/login"}> Already Registered? Sign-in  </Link></p>
 
-            <button className="pink-btn absolute bottom-10" type="submit" > Create Account </button>
+            <button className="pink-btn text-white relative mt-10 left-1/2 -translate-x-1/2" type="submit" > Create Account </button>
         </form>
     )
 }

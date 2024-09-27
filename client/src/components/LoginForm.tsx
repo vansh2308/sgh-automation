@@ -2,8 +2,7 @@ import { useForm } from "react-hook-form";
 import { loginFormData, loginFormFieldProps, loginFormSchema } from "../types";
 import { MdClose } from "react-icons/md";
 import { zodResolver } from "@hookform/resolvers/zod";
-// import FormField from "./FormField";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { hideLoginForm } from "../features/loginFormDisplaySlice";
 
@@ -21,10 +20,12 @@ export default function LoginForm({ }) {
     });
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
 
     const onSubmit = async (data: loginFormData) => {
-        console.log("SUCCESS")
+        console.log("SUCCESS");
+        navigate("/user/:423")
     }
 
 
@@ -64,7 +65,7 @@ export default function LoginForm({ }) {
             <span className="text-[0.7rem] font-medium text-pink underline mt-9 cursor-pointer w-full"> <Link to={"/register"}> Not registered? Create an account </Link> </span>
 
 
-            <button type="submit" className="pink-btn absolute bottom-10" > Sign In </button>
+            <button type="submit" className="pink-btn absolute bottom-10 text-white" > Sign In </button>
         </form>
     )
 }
