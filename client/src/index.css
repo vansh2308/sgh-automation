@@ -26,8 +26,10 @@ body {
 
 *::-webkit-scrollbar {
     display: none;
-  }
-  
+}
+
+
+
 
 
 .pink-btn {
@@ -37,7 +39,14 @@ body {
 
 
 
-.MuiPieArc-root{
+.MuiPieArc-root {
     stroke-opacity: 0;
 }
 
+
+.MuiChartsAxis-root,
+.MuiChartsAxis-directionX,
+.MuiChartsAxis-directionY,
+.MuiChartsAxis-root line {
+    @apply stroke-white-dark dark:stroke-white
+}

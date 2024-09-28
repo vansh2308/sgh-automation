@@ -27,12 +27,11 @@ export default function CategoryDistribution() {
     }
       series={[
         { dataKey: 'y', color: "#5DC4DA" },
-        // { dataKey: 'total', color: "#2A7C9E" },
         { dataKey: 'furniture', color: "#FE3494" },
-        { dataKey: 'lighting', color: "#181D3C" },
+        { dataKey: 'lighting', color: "#2A7C9E" },
     ]}
       height={300}
-      margin={{ left: 30, right: 30, top: 30, bottom: 30 }}
+      margin={{ top: 30, bottom: 30 }}
     />
   );
 }

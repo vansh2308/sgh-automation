@@ -121,9 +121,11 @@ export default function AdminDashboard({ }) {
                     </div>
                 </Stack>
             </div>
-
-            <div className="w-full mt-20 flex gap-10">
+            
+            <div className="w-[100%] mt-20 flex gap-10">
                 <CategoryDistribution  />
+
+                {/* WIP: Wire up select legend  */}
                 <div className="w-[30%] bg-blue-1 dark:bg-blue-1-dark rounded-lg">
                 </div>
             </div>

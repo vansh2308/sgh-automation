@@ -80,25 +80,20 @@ export default function UserLayout({ }) {
         dispatch(toggle())
     }
 
-
+    
 
     return (
         <div className="flex w-screen h-screen bg-white text-blue-3 dark:text-blue-3-dark dark:bg-white-dark" >
 
             {
-                <div className={`bg-blue-1 dark:bg-blue-1-dark relative sidebar p-10 pt-8  ${sidebarOpen ? "w-fit" : "w-2 p-5 flex items-center justify-center"}`}>
+                <div
+                    className={`bg-blue-1 dark:bg-blue-1-dark absolute h-screen overflow-y-hidden z-10 shadow-2xl sidebar p-10 pt-8  ${sidebarOpen ? "w-fit" : "w-5 p-0 bg-transparent opacity-0"}`}
+                    onMouseEnter={(e) => setSidebarOpen(true)}
+                >
 
-                    {/* WIP: Create Menu open/close toggle */}
 
-                    {
-                        !sidebarOpen && 
-                        <IoMdArrowDropright className='text-2xl' />
-                    }
-
-                    {sidebarOpen && 
-
+                    {true &&
                         <>
-
                             <div className='w-full h-5 mb-10 flex text-[1.2rem] flex-row-reverse'>
                                 <button onClick={() => setSidebarOpen(false)}>
                                     <IoClose />
