@@ -29,3 +29,8 @@ body {
 .pink-btn {
     @apply bg-pink rounded-full py-3 px-9 w-fit text-sm;
 }
+
+
+.MuiPieArc-root{
+    stroke-opacity: 0;
+}

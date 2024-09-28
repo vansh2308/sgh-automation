@@ -1,107 +1,142 @@
-import { arc, select } from 'd3';
-import { useEffect, useState, useRef, MutableRefObject } from 'react';
+
+import * as React from 'react';
+import { PieChart } from '@mui/x-charts/PieChart';
+import { useDrawingArea } from '@mui/x-charts/hooks';
+import { createTheme, styled } from '@mui/material/styles';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../app/store';
+import { DefaultizedPieValueType, PieItemIdentifier } from '@mui/x-charts';
 
 
+type Data = { label: string, value: number, color: string }[][]
 
-const data = [
-  {
-    innerRadius: 50,
-    outerRadius: 60,
-    value: 0.6,
-    color: "#FE3494"
-  },
-  {
-    innerRadius: 70,
-    outerRadius: 80,
-    value: 0.5,
-    color: "#2A7C9E"
-  },
-  {
-    innerRadius: 90,
-    outerRadius: 100,
-    value: 0.75,
-    color: "#5DC4DA"
-  },
 
-]
+// WIP: Fix highlight styles 
+
 
 
 export default function RadialChart() {
-
-  const containerRef = useRef() as MutableRefObject<HTMLDivElement>
   const theme = useSelector((state: RootState) => state.theme.value)
+  const [highlight, setHighlight] = useState<React.ReactNode>("Revenue")
+
+
+  const [data, setData] = useState<Data>(
+    [
+      [{ label: 'Etsy', value: 0.5, color: "#5DC4DA"},],
+      [{ label: 'Shopify', value: 0.4, color: "#FE3494"},],
+      [{ label: 'Manual', value: 0.7, color: "#2A7C9E"},],
+      [{ label: '', value: 1, color: theme == "light" ? "#E4F3F7" : "#1D2449" },]
+    ]
+  )
 
   useEffect(() => {
-    let grooveColor = "#E4F3F7"
-    drawChart(grooveColor)
+    setData(
+      [
+        [{ label: 'Etsy', value: 0.5, color: "#5DC4DA"},],
+        [{ label: 'Shopify', value: 0.4, color: "#FE3494"},],
+        [{ label: 'Manual', value: 0.7, color: "#2A7C9E"},],
+        [{ label: '', value: 1, color: theme == "light" ? "#E4F3F7" : "#1D2449" },]
+      ]
+    )
   }, [theme])
 
+  const handleClick = (
+    event: React.MouseEvent<SVGPathElement, MouseEvent>,
+    itemIdentifier: PieItemIdentifier,
+    item: DefaultizedPieValueType,
+  ) => {
+    let itemId = itemIdentifier.seriesId.slice(-1)
+    if(itemId > 2){
+      setHighlight(
+        <span className='text-yellow-500'>
+          {`${data[itemId-3][0].label} - ${data[itemId-3][0].value * 100}%`}
+        </span>
+      )
 
-  // WIP: Add Dark mode, Hover States
-
-  function drawChart(grooveColor: string) {
-    console.log("Drawing")
-    const height = containerRef.current.clientHeight, width = containerRef.current.clientWidth;
-
-    select("svg").remove()
-
-    const svg = select(containerRef.current)
-      .append('svg')
-      .attr('height', `${height}`)
-      .attr('width', `${width}`)
-      .attr("viewBox", `0 0 ${width} ${height}`)
-      .append("g")
-      .attr("transform", "translate(" + width / 5 + "," + height / 2 + ")")
-
-
-    for (let i = 0; i < data.length; i++) {
-      const Arc = arc()
-        .innerRadius(data[i].innerRadius)
-        .outerRadius(data[i].outerRadius)
-        .startAngle(0)
-        .cornerRadius(40)
-
-      const backgroundArc = arc()
-        .innerRadius(data[i].innerRadius - 1)
-        .outerRadius(data[i].outerRadius + 1)
-        .startAngle(0)
-        .cornerRadius(40)
-
-      svg.append("path")
-        .datum({ endAngle: 1 * Math.PI * 2 })
-        .attr("d", backgroundArc)
-        .style("fill", grooveColor);
-
-
-      svg.append("path")
-        .datum({ endAngle: data[i].value * Math.PI * 2 })
-        .attr("d", Arc)
-        .style("fill", data[i].color);
-
+      console.log(highlight)
     }
+  };
 
-    svg.append("text")
-      .attr("text-anchor", "middle")
-      .text(`50%`)
-      .style('font-size', '1.5rem')
-      .style('fill', '#181D3C');
 
-    svg.append("text")
-      .attr("text-anchor", "middle")
-      .text("Etsy")
-      .attr('dy', '1.3em')
-      .style('font-size', '0.75em');
+  const StyledText = styled('text')(({ }) => ({
+    fill: "#5DC4DA",
+    textAnchor: 'middle',
+    dominantBaseline: 'central',
+    fontSize: 20,
+    fontWeight: "600"
+  }));
+  
+  function PieCenterLabel({ children }: { children: React.ReactNode }) {
+    const { width, height, left, top } = useDrawingArea();
+    return (
+      <StyledText x={left + width / 2} y={top + height / 2}>
+        {children}
+      </StyledText>
+    );
   }
+  
+  
 
 
   return (
-    <div
-      ref={containerRef}
-      className='w-full h-full'
-    />
-
+    <PieChart
+      series={[
+        {
+          innerRadius: 80,
+          outerRadius: 90,
+          endAngle: 360,
+          data: data[3],
+        },
+        {
+          innerRadius: 100,
+          outerRadius: 110,
+          endAngle: 360,
+          data: data[3],
+        },
+        {
+          innerRadius: 120,
+          outerRadius: 130,
+          endAngle: 360,
+          data: data[3],
+        },
+        {
+          innerRadius: 80,
+          outerRadius: 90,
+          endAngle: data[0][0].value * 360,
+          cornerRadius: 40,
+          data: data[0],
+        },
+        {
+          innerRadius: 100,
+          outerRadius: 110,
+          endAngle: data[1][0].value * 360,
+          cornerRadius: 40,
+          data: data[1],
+        },
+        {
+          innerRadius: 120,
+          outerRadius: 130,
+          endAngle: data[2][0].value * 360,
+          cornerRadius: 40,
+          data: data[2],
+        },
+      ]}
+      onItemClick={handleClick}
+      width={400}
+      height={300}
+      slotProps={{
+        legend: { hidden: true },
+      }}
+      tooltip={{
+        trigger: 'none'
+      }}
+    >
+      <PieCenterLabel>
+        {highlight}
+      </PieCenterLabel>
+    </PieChart>
   );
 }
+
 

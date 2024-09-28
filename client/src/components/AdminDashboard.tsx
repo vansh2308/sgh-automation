@@ -110,9 +110,7 @@ export default function AdminDashboard({ }) {
                 </div>
 
 
-                <div className=" col-start-1 col-end-3 overflow-hidden relative">
-                    <RadialChart />
-                </div>
+                <RadialChart />
             </div>
         </div>
     )
