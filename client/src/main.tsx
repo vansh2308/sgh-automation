@@ -19,6 +19,10 @@ import Inventory from './pages/Inventory.tsx';
 
 
 
+
+
+
+
 const router = createBrowserRouter([
   {
     path: "/",

@@ -9,6 +9,8 @@ import DonughtChart from "./charts/DonughtChart";
 import { Stack } from "@mui/material";
 import { LineChart } from "@mui/x-charts";
 import CategoryDistribution from "./charts/LineChart";
+import CheckboxLegend from "./CheckboxLegend";
+import { useEffect, useState } from "react";
 
 
 
@@ -43,6 +45,8 @@ const notifications = [
 
 
 export default function AdminDashboard({ }) {
+
+
     return (
         <div className="w-full h-full overflow-x-hidden overflow-y-scroll">
             <div
@@ -121,14 +125,30 @@ export default function AdminDashboard({ }) {
                     </div>
                 </Stack>
             </div>
-            
-            <div className="w-[100%] mt-20 flex gap-10">
-                <CategoryDistribution  />
 
-                {/* WIP: Wire up select legend  */}
-                <div className="w-[30%] bg-blue-1 dark:bg-blue-1-dark rounded-lg">
-                </div>
+            <LineChartWrapper />
+
+
+        </div>
+    )
+}
+
+
+
+
+const LineChartWrapper = () => {
+
+    const [categoryFilter, setCategoryFilter] = useState<string[]>(['fabricItems', 'furniture', 'lighting', 'total'])
+    
+    return (
+        <div className="w-[100%] mt-20 flex gap-7">
+            <CategoryDistribution categoryFilter={categoryFilter} />
+
+            {/* WIP: Wire up select legend  */}
+            <div className="w-fit rounded-lg flex p-3" >
+                <CheckboxLegend categoryFilter={categoryFilter} setCategoryFilter={setCategoryFilter} />
             </div>
         </div>
     )
+
 }
