@@ -7,10 +7,9 @@ import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import { Link } from "react-router-dom";
 
 
-export default function ProfileDisplay({ username }: { username?: string }) {
-    const currentUser = useSelector((state: RootState) => state.user.value)
-    const [user, setUser] = useState(currentUser)
-    // WIP: Wire up search user 
+export default function ProfileDisplay({user}: {user: userType}) {
+    
+
 
     return (
         <div className="h-full flex-1 pl-[18vw] overflow-y-scroll">

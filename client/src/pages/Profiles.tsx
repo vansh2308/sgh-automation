@@ -2,6 +2,8 @@ import ProfileDisplay from "../components/ProfileDisplay"
 import { IoSearch } from "react-icons/io5";
 import { userType } from "../types";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "../app/store";
 
 
 
@@ -68,7 +70,11 @@ const allUsers: userType[] = [
     },
 ]
 
+
+// WIP: Wire up edit profile feature 
 export default function Profiles() {
+    const currentUser = useSelector((state: RootState) => state.user.value)
+    const [user, setUser] = useState(currentUser)
     const [query, setQuery] = useState("")
     const [userList, setUserList] = useState(allUsers)
 
@@ -91,7 +97,7 @@ export default function Profiles() {
 
     return (
         <div className="w-full h-full overflow-x-hidden overflow-y-scroll flex gap-9 ">
-            <ProfileDisplay />
+            <ProfileDisplay user={user} />
 
             <div className="min-w-fit w-[25vw] h-full border-l-[1px] border-l-blue-2  dark:border-l-blue-2-dark pl-7">
                 <div className="w-full flex text-white-dark dark:text-white bg-blue-1 dark:bg-blue-1-dark items-center p-3 rounded-md overflow-hidden">
@@ -102,7 +108,7 @@ export default function Profiles() {
                     </button>
                 </div>
 
-                <UsersList userList = {userList} />
+                <UsersList userList = {userList} setUser={setUser} />
             </div>
         </div>
     )
@@ -113,14 +119,14 @@ export default function Profiles() {
 
 
 
-function UsersList({userList}: {userList: userType[]}) {
+function UsersList({userList, setUser}: {userList: userType[], setUser: React.Dispatch<React.SetStateAction<userType>>}) {
     return (
         <ul role="list" className="divide-y divide-gray-100 mt-7">
             {userList.map((user) => (
 
                 <li key={user.email}
                     className="flex justify-between gap-x-6 py-5 cursor-pointer"
-                    onClick={() => { console.log(user.email) }}
+                    onClick={() => { setUser(user) }}
                 >
 
                     <div className="flex min-w-0 gap-x-4">
