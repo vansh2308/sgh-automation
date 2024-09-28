@@ -43,6 +43,8 @@ export type registerFormData = {
     password: string;
     confirmPassword: string;
     dateJoined: string;
+    email?: string,
+    contact: string,
     gender: 'male' | 'female';
     role: "admin" | "supervisor" | "manufacturing" | "repair" | "polish" | "check" | "shipping" | "packaging"
 };
@@ -57,8 +59,11 @@ export type registerFormFieldProps = {
 };
 
 
-export type registerFormValidFieldNames = "name" | "username" | "password" | "confirmPassword" | "dateJoined" | "gender" | "role";
+export type registerFormValidFieldNames = "name" | "username" | "password" | "confirmPassword" | "dateJoined" | "gender" | "role" | "email" | "contact";
 
+const phoneRegex = new RegExp(
+    /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/
+);
 
 
 export const registerFormSchema: ZodType<registerFormData> = z
@@ -71,6 +76,10 @@ export const registerFormSchema: ZodType<registerFormData> = z
             .max(20, { message: "Password is too long" }),
         confirmPassword: z.string(),
         dateJoined: z.string().date(),
+        email: z.string()
+            .min(1, { message: "This field has to be filled." })
+            .email("This is not a valid email."),
+        contact: z.string().regex(phoneRegex, 'Invalid Number!'),
         gender: z.enum(["male", "female"]),
         role: z.enum(["admin", "supervisor", "manufacturing", "repair", "polish", "check", "shipping", "packaging"])
 
@@ -81,3 +90,24 @@ export const registerFormSchema: ZodType<registerFormData> = z
 
 
 
+
+
+// User type
+export type userType = {
+    name: string,
+    username: string,
+    dateJoined: Date,
+    gender: "male" | "female",
+    role: "admin" | "supervisor" | "manufacturing" | "repair" | "polish" | "check" | "shipping" | "packaging",
+    email: string,
+    contact: string,
+    activities?: activityType[]
+
+}
+
+
+export type activityType = {
+    headline: string,
+    link: string,
+    timestamp: Date
+}

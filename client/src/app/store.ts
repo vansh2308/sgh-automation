@@ -4,11 +4,13 @@ import { configureStore } from '@reduxjs/toolkit'
 
 import loginFormDisplayReducer from '../features/loginFormDisplaySlice'
 import themeReducer from '../features/themeSlice'
+import userReducer from '../features/userSlice'
 
 export const store = configureStore({
   reducer: {
     loginFormDisplay: loginFormDisplayReducer,
-    theme: themeReducer
+    theme: themeReducer,
+    user: userReducer
   }
 })
 
