@@ -5,6 +5,8 @@ import { FaArrowTrendUp } from "react-icons/fa6";
 import { FaBell } from "react-icons/fa";
 import NotificationTile from "./NotificationTile";
 import RadialChart from "./charts/RadialChart";
+import DonughtChart from "./charts/DonughtChart";
+import { Stack } from "@mui/material";
 
 
 
@@ -109,8 +111,11 @@ export default function AdminDashboard({ }) {
                     </ul>
                 </div>
 
+                <Stack direction="row" width="100%" >
+                    <RadialChart />
+                    <DonughtChart />
+                </Stack>
 
-                <RadialChart />
             </div>
         </div>
     )
