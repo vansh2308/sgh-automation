@@ -62,7 +62,7 @@ export default function UserLayout({ }) {
     const [sidebarOpen, setSidebarOpen] = useState(true)
 
     const dispatch = useDispatch()
-    const theme = useSelector((state: RootState) => state.theme.value) 
+    const theme = useSelector((state: RootState) => state.theme.value)
     const themeBtn = useRef() as MutableRefObject<HTMLButtonElement>;
 
     useEffect(() => {
@@ -81,43 +81,47 @@ export default function UserLayout({ }) {
 
 
 
-
     return (
         <div className="flex w-screen h-screen bg-white text-blue-3 dark:text-blue-3-dark dark:bg-white-dark" >
 
             {
-                sidebarOpen &&
-                <div className='w-fit bg-blue-1 dark:bg-blue-1-dark relative p-10 pt-8 min-w-max'>
+                <div className={`bg-blue-1 dark:bg-blue-1-dark relative sidebar p-10 pt-8  ${sidebarOpen ? "w-fit" : "w-2"}`}>
 
-                    <div className='w-full h-5 mb-10 flex text-[1.2rem] flex-row-reverse'>
-                        <button onClick={() => setSidebarOpen(false)}>
-                            <IoClose />
-                        </button>
-                    </div>
+                    {sidebarOpen &&
+
+                        <>
+
+                            <div className='w-full h-5 mb-10 flex text-[1.2rem] flex-row-reverse'>
+                                <button onClick={() => setSidebarOpen(false)}>
+                                    <IoClose />
+                                </button>
+                            </div>
 
 
-                    <div className='flex gap-4 items-center'>
-                        <div className='rounded-full aspect-square bg-blue-2 dark:bg-blue-2-dark w-14 flex items-center justify-center text-white dark:text-white-dark text-[1.5rem]'> V </div>
-                        <div>
-                            <p className='text-xs text-blue-2 font-semibold dark:text-blue-2-dark'>Welcome</p>
-                            <span className='text-lg font-light mt-2 mr-7'>Vansh2308</span>
-                        </div>
-                    </div>
+                            <div className='flex gap-4 items-center'>
+                                <div className='rounded-full aspect-square bg-blue-2 dark:bg-blue-2-dark w-14 flex items-center justify-center text-white dark:text-white-dark text-[1.5rem]'> V </div>
+                                <div>
+                                    <p className='text-xs text-blue-2 font-semibold dark:text-blue-2-dark'>Welcome</p>
+                                    <span className='text-lg font-light mt-2 mr-7'>Vansh2308</span>
+                                </div>
+                            </div>
 
-                    <nav className='flex flex-col gap-6 mt-16'>
+                            <nav className='flex flex-col gap-6 mt-16'>
 
-                        {
-                            links.map((item, key) => {
-                                return (
-                                    <SidebarLink item={item} key={key} />
-                                )
-                            })
-                        }
-                    </nav>
+                                {
+                                    links.map((item, key) => {
+                                        return (
+                                            <SidebarLink item={item} key={key} />
+                                        )
+                                    })
+                                }
+                            </nav>
 
-                    <button className='absolute rounded-full w-20 h-9 p-[0.3rem] bg-blue-2 dark:bg-blue-2-dark flex bottom-10 ' ref={themeBtn} onClick={toggleTheme}>
-                        <div className='rounded-full aspect-square h-full bg-white dark:bg-white-dark' />
-                    </button>
+                            <button className='absolute rounded-full w-20 h-9 p-[0.3rem] bg-blue-2 dark:bg-blue-2-dark flex bottom-10 ' ref={themeBtn} onClick={toggleTheme}>
+                                <div className='rounded-full aspect-square h-full bg-white dark:bg-white-dark' />
+                            </button>
+                        </>
+                    }
 
                 </div>
 
@@ -143,15 +147,13 @@ const SidebarLink = ({ item }: {
 
     const dispatch = useDispatch()
 
-
-
     return (
-        <NavLink 
-        to={item.link} 
-        className={({ isActive }) => isActive ? "text-blue-2 dark:text-blue-2-dark font-bold" : ""} 
-        onClick={() => {
-            {item.text == "Logout" && dispatch(hideLoginForm()) }
-        }}
+        <NavLink
+            to={item.link}
+            className={({ isActive }) => isActive ? "text-blue-2 dark:text-blue-2-dark font-bold" : ""}
+            onClick={() => {
+                { item.text == "Logout" && dispatch(hideLoginForm()) }
+            }}
         >
             <div className={`flex items-center gap-5 text-xs hover:font-medium ${item.text == "Logout" ? "text-pink mt-10" : ""}`}>
                 {item.icon}
