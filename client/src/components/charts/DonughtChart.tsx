@@ -14,7 +14,7 @@ import { DefaultizedPieValueType, PieItemIdentifier } from '@mui/x-charts';
 type Data = { label: string, value: number, color: string }[]
 
 
-// WIP: Fix highlight styles 
+// WIP: Fix highlight styles, responsiveness
 
 
 

@@ -7,6 +7,8 @@ import NotificationTile from "./NotificationTile";
 import RadialChart from "./charts/RadialChart";
 import DonughtChart from "./charts/DonughtChart";
 import { Stack } from "@mui/material";
+import { LineChart } from "@mui/x-charts";
+import CategoryDistribution from "./charts/LineChart";
 
 
 
@@ -46,7 +48,7 @@ export default function AdminDashboard({ }) {
             <div
                 className="grid w-full max-h-60vh gap-10"
                 style={{
-                    gridTemplateColumns: "repeat(3, 1fr)",
+                    gridTemplateColumns: "repeat(2, 1fr) auto",
                     gridTemplateRows: "auto 30vh"
                 }}
             >
@@ -90,7 +92,7 @@ export default function AdminDashboard({ }) {
                 </div>
 
 
-                <div className="col-start-3 row-start-1 row-end-3 flex flex-col max-h-[60vh]">
+                <div className="w-[30vw] col-start-3 row-start-1 row-end-3 flex flex-col max-h-[60vh]">
                     <div className="flex gap-5 min-h-max items-center">
 
                         <h3 className="text-blue-2 dark:text-blue-2-dark font-bold text-xl">Notifications</h3>
@@ -111,11 +113,19 @@ export default function AdminDashboard({ }) {
                     </ul>
                 </div>
 
-                <Stack direction="row" width="100%" >
-                    <RadialChart />
-                    <DonughtChart />
-                </Stack>
+                <Stack direction="row" className="justify-self-stretch" >
+                    <div className="flex">
 
+                        <RadialChart />
+                        <DonughtChart />
+                    </div>
+                </Stack>
+            </div>
+
+            <div className="w-full mt-20 flex gap-10">
+                <CategoryDistribution  />
+                <div className="w-[30%] bg-blue-1 dark:bg-blue-1-dark rounded-lg">
+                </div>
             </div>
         </div>
     )

@@ -24,6 +24,10 @@ body {
     @apply bg-blue-1;
 }
 
+*::-webkit-scrollbar {
+    display: none;
+  }
+  
 
 
 .pink-btn {
@@ -31,6 +35,9 @@ body {
 }
 
 
+
+
 .MuiPieArc-root{
     stroke-opacity: 0;
 }
+

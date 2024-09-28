@@ -14,6 +14,7 @@ import { useRef, useEffect } from 'react';
 import { toggle } from '../features/themeSlice';
 import { RootState } from "../app/store"
 import { hideLoginForm } from '../features/loginFormDisplaySlice';
+import { IoMdArrowDropright } from "react-icons/io";
 
 
 
@@ -85,9 +86,16 @@ export default function UserLayout({ }) {
         <div className="flex w-screen h-screen bg-white text-blue-3 dark:text-blue-3-dark dark:bg-white-dark" >
 
             {
-                <div className={`bg-blue-1 dark:bg-blue-1-dark relative sidebar p-10 pt-8  ${sidebarOpen ? "w-fit" : "w-2"}`}>
+                <div className={`bg-blue-1 dark:bg-blue-1-dark relative sidebar p-10 pt-8  ${sidebarOpen ? "w-fit" : "w-2 p-5 flex items-center justify-center"}`}>
 
-                    {sidebarOpen &&
+                    {/* WIP: Create Menu open/close toggle */}
+
+                    {
+                        !sidebarOpen && 
+                        <IoMdArrowDropright className='text-2xl' />
+                    }
+
+                    {sidebarOpen && 
 
                         <>
 
