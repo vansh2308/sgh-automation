@@ -1,10 +1,10 @@
-
+import OrdersPage from "../components/orderpage";
 
 
 export default function AllOrders(){
     return(
         <div >
-            All Orders
+            <OrdersPage/>
         </div>
     )
 }
